@@ -1,0 +1,16 @@
+Package: maskdecoder
+Type: Package
+Title: Get device design parameters from the mask set!
+Version: 0.1.0
+Authors@R: c(
+    person(
+      "Brian", "Pile",
+      email = "something@example.com",
+      role = c("aut", "cre")
+    )
+  )
+Description: More about what it does (maybe more than one line).
+    Continuation lines should be indented.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true

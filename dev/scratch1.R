@@ -6,21 +6,33 @@
 
 # setup ----
 suppressPackageStartupMessages(library(tidyverse))
+theme_set(theme_bw())
+
+# generate eevee die coords
+df_eevee_die_coords = get_eevee_die_coords()
 
 
-# check sivers label conversions
-sivers_decimal_to_code(127)
-sivers_code_to_decimal("C7")
+# wafer map check ----
+df_eevee_die_coords |>
+  ggplot(aes(xmin = die_x_coord, xmax = die_x_coord + DIE_WIDTH, ymin = die_y_coord, ymax = die_y_coord + DIE_LENGTH)) +
+  geom_rect(aes(fill = as.factor(cell_id)), color = "white", linewidth = 0, na.rm = FALSE) +
+  # geom_path(
+  #   data = circ_dat,
+  #   mapping = aes(x = x, y = y),
+  #   inherit.aes = FALSE,
+  #   color = "gray"
+  # ) +
+  coord_equal(xlim = c(-80000/2, 80000/2)) +
+  # facet_wrap( ~ waferID) +
+  scale_fill_viridis_d(direction = 1, option = "plasma") +
+  scale_fill_viridis_d() +
+  theme(
+    panel.grid = element_blank()
+  ) +
+  labs(
+    title = "EEVEE Chip Map",
+    fill = "Cell ID"
+  ) +
+  guides(fill=guide_legend(ncol=2))
 
-# build the device design parameter data frame
-sivers_labs = generate_sivers_alphanumeric_sequence()
-eevee_all_bar_die = crossing(
-  bar_id = sivers_labs$code[1:(26 * 4)],
-  die_id = sivers_labs$code[1:(55 * 6)]
-)
-
-df_eevee = eevee_all_bar_die |>
-  mutate(
-    cell_id = get_eevee_cell_id(bar_id, die_id)
-  )
 

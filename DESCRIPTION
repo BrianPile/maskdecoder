@@ -16,3 +16,6 @@ Encoding: UTF-8
 LazyData: true
 URL: https://github.com/BrianPile/maskdecoder
 BugReports: https://github.com/BrianPile/maskdecoder/issues
+RoxygenNote: 7.3.3
+Imports: 
+    tibble

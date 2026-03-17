@@ -1,12 +1,20 @@
+#' Add EEVEE grating design info to data frame
+#'
+#' @param dat A data frame containing cell_id and bar_id columns
+#'
+#' @returns A data frame with grt_no and grt_pitch columns added
+#' @export
+#'
+# @examples
 add_eevee_grating_info = function(dat) {
 
   dat |>
-    mutate(
+    dplyr::mutate(
       grt_no =
         dplyr::case_when(
 
           cell_id == "23" ~
-            case_when(
+            dplyr::case_when(
               .data$bar_id_decimal %in% (c(59, 65) + 0) ~ "1A",
               .data$bar_id_decimal %in% (c(59, 65) + 1) ~ "1B",
               .data$bar_id_decimal %in% (c(59, 65) + 2) ~ "2A",
@@ -19,7 +27,7 @@ add_eevee_grating_info = function(dat) {
             ),
 
           cell_id == "33" ~
-            case_when(
+            dplyr::case_when(
               .data$bar_id_decimal %in% (c(55) + 0) ~ "1A",
               .data$bar_id_decimal %in% (c(55) + 1) ~ "1B",
               .data$bar_id_decimal %in% (c(55) + 2) ~ "2A",
@@ -32,7 +40,7 @@ add_eevee_grating_info = function(dat) {
             ),
 
           .default = # default grating distribution
-            case_when(
+            dplyr::case_when(
               ((.data$bar_id_decimal - 1) %% CELL_NROW + 1) %in% (c(1, 7, 13) + 0) ~ "1A",
               ((.data$bar_id_decimal - 1) %% CELL_NROW + 1) %in% (c(1, 7, 13) + 1) ~ "1B",
               ((.data$bar_id_decimal - 1) %% CELL_NROW + 1) %in% (c(1, 7, 13) + 2) ~ "2A",

@@ -63,7 +63,7 @@ df_eevee |>
     title = "EEVEE Grating No. Map",
     # fill = "Cell ID"
   ) +
-  guides(fill=guide_legend(ncol=2))
+  guides(fill=guide_legend(ncol=1))
 
 
 # grating design statistics ----

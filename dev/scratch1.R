@@ -5,6 +5,8 @@
 # 2. It takes the barID and dieID as input. That's it.
 
 # setup ----
+
+# make sure to 'Load All'
 suppressPackageStartupMessages(library(tidyverse))
 theme_set(theme_bw())
 wafer_diameter_mm = 75

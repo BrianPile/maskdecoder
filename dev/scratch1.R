@@ -44,7 +44,7 @@ df_eevee |>
 
 # grating no
 df_eevee |>
-  # filter(r <= wafer_diameter_mm*1e3/2) |>
+  filter(r <= wafer_diameter_mm*1e3/2) |>
   ggplot(aes(xmin = die_x_coord, xmax = die_x_coord + DIE_WIDTH, ymin = die_y_coord, ymax = die_y_coord + DIE_LENGTH)) +
   geom_rect(aes(fill = grt_no), color = "white", linewidth = 0, na.rm = FALSE) +
   # geom_path(
@@ -64,4 +64,15 @@ df_eevee |>
     # fill = "Cell ID"
   ) +
   guides(fill=guide_legend(ncol=2))
+
+
+# grating design statistics ----
+df_eevee |>
+  drop_na(grt_no) |>
+  filter(r <= wafer_diameter_mm*1e3/2) |>
+  count(grt_no) |>
+  mutate(
+    pct = n / sum(n) * 100
+  ) |>
+  janitor::adorn_totals()
 

@@ -44,11 +44,6 @@ df_eevee |>
   ) +
   guides(fill=guide_legend(ncol=2))
 
-
-
-
-
-
 # grating no
 df_eevee |>
   filter(r <= wafer_diameter_mm*1e3/2) |>

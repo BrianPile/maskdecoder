@@ -58,7 +58,7 @@ add_eevee_grating_info = function(dat) {
             )
         ),
 
-      grt_wl_target = grt_no |>
+      grt_wl_target = .data$grt_no |>
         dplyr::recode_values(
           "1A" ~ 1571.24,
           "1B" ~ 1572.89,

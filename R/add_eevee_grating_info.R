@@ -15,9 +15,9 @@ add_eevee_grating_info = function(dat) {
 
   dat |>
     dplyr::mutate(
+
       grt_no =
         dplyr::case_when(
-
           cell_id == "23" ~
             dplyr::case_when(
               .data$bar_id_decimal %in% (c(59, 65) + 0) ~ "1A",
@@ -54,10 +54,21 @@ add_eevee_grating_info = function(dat) {
               ((.data$bar_id_decimal - 1) %% CELL_NROW + 1) %in% (c(1, 7, 13) + 5) ~ "3B",
               ((.data$bar_id_decimal - 1) %% CELL_NROW + 1) %in% (c(19, 21, 23, 25) + 0) ~ "4A",
               ((.data$bar_id_decimal - 1) %% CELL_NROW + 1) %in% (c(19, 21, 23, 25) + 1) ~ "4B",
-
               .default = NA
             )
+        ),
 
+      grt_wl_target = grt_no |>
+        dplyr::recode_values(
+          "1A" ~ 1571.24,
+          "1B" ~ 1572.89,
+          "2A" ~ 1574.55,
+          "2B" ~ 1576.20,
+          "3A" ~ 1577.87,
+          "3B" ~ 1579.52,
+          "4A" ~ 1581.20,
+          "4B" ~ 1582.85,
+          default = 9999
         )
     )
 }

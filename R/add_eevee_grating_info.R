@@ -8,6 +8,11 @@
 # @examples
 add_eevee_grating_info = function(dat) {
 
+  stopifnot(
+    "`dat` is missing required column: cell_id"        = "cell_id" %in% names(dat),
+    "`dat` is missing required column: bar_id_decimal" = "bar_id_decimal" %in% names(dat)
+  )
+
   dat |>
     dplyr::mutate(
       grt_no =
